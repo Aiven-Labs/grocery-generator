@@ -2,12 +2,18 @@
 
 The code from this repository generates grocery purchases that are sent to an Apache Kafka topic.
 
-To configure your Apache Kafka cluster rename config-example.py into config.py and set your Apache Kafka URI there. Create a folder **Certificates** and add Apache Kafka certificates - ca.pem, service.cert and service.key into it.
+## Steps to use this repository
 
-You can run it by calling the command below from your terminal:
+1. Install dependencies: 
+```bash
+pip install -r requirements.txt
+```
 
+2. Configure your Apache Kafka cluster: rename config-example.py into config.py and set your Apache Kafka URI there. Also create a folder **Certificates** and add Apache Kafka certificates - ca.pem, service.cert and service.key into it. 
+
+3. Create topics **CDC-input** and **input-events** in the Apache Kafka service
+
+4. Run the script:
 ```bash
 python makeData.py
 ```
-
-Two topics will be created in your Apache Kafka service - **CDC-input** and **input-events**

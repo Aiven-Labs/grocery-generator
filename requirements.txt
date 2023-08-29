@@ -1,0 +1,15 @@
+aiokafka==0.8.1
+annotated-types==0.5.0
+async-timeout==4.0.3
+kafka-python==2.0.2
+noise==1.2.2
+numpy==1.25.2
+packaging==23.1
+pip==23.2.1
+pydantic==2.3.0
+pydantic_core==2.6.3
+setuptools==68.0.0
+snowflake==0.0.4
+snowflake-id==0.0.4
+typing_extensions==4.7.1
+wheel==0.38.4
