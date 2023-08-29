@@ -26,8 +26,6 @@ context = create_ssl_context(
     keyfile="certificates/service.key",
 )
 
-TOPIC_NAME = "input-events"
-
 def generate_simplex_noise(period, num_values, amplitude=1, seed=0, octaves=1, persistence=0.5):
     noise_values = np.zeros(num_values)
     frequency = 1 / period
@@ -126,7 +124,7 @@ async def my_loop(my_producer):
                     seconds=(max(86400, (86400 / (min(weighted_purchases, 1))))))
                 basket_size = max(round(random.gauss(25 * holiday_weighting, 12 * ((1 + holiday_weighting) / 2))),
                                   2) + 2
-                my_basket = Basket(id=next(basket_id), city=city.name, purchase_day=current_day.timestamp(),
+                my_basket = Basket(id=next(basket_id), city=city.name, purchase_day=int(current_day.timestamp()),
                                    purchases=[], total_purchases=basket_size)
 
                 for basket_item in range(basket_size):
@@ -193,9 +191,12 @@ async def my_loop(my_producer):
                         pass
                     pass
                 await producer.send(topic_name, my_basket.json().encode("utf-8"))
+                print(f"Sent basket for {city.name} on {current_day.strftime('%Y-%m-%d')}")
+
 
             total_purchases += len(daily_purchases)
             json_purchases = json.dumps(daily_purchases)
+            print(f"Sent {len(daily_purchases)} purchases for {city.name} on {current_day.strftime('%Y-%m-%d')}")
 
 async def main():
     global producer
